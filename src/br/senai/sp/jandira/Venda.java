@@ -11,12 +11,9 @@ public class Venda {
             System.out.println("-------------------------------------------------");
             return true;
 
-
         }else{
-
             System.out.println(" EScolha um veiculo mais compativel com sua realidade");
             return false;
-
 
         }
 
