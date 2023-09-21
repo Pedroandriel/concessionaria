@@ -9,9 +9,9 @@ public class Cliente {
      * Declarar Variaveis
      */
 
-    String nome, email, endereco;
-    long telefone, cpf, rg;
-    double dinheiroDispostonivel;
+    public String nome, email, endereco;
+    public long telefone, cpf, rg;
+    public double dinheiroDispostonivel;
     /**
      * Instanciar o Scanner
      */
@@ -51,6 +51,15 @@ public class Cliente {
             System.out.println(objCliente.nome);
         }
     }
+    public Cliente pesquisarComprador(String nomeComprador){
 
+        for (Cliente cliente : listClientes) {
+            if (cliente.nome.equalsIgnoreCase(nome)) {
+             return cliente;
+            }
+        }
+        return null;
+
+    }
 
 }

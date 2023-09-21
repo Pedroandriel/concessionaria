@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Veiculo {
-    String modelo, marca, cor, placa, combustivel;
+    public String modelo, marca, cor, placa, combustivel;
 
-    double preco;
+    public double preco;
 
-    int ano;
-    boolean disponivel;
+    public int ano;
+    public boolean disponivel;
     /**
      * Instanciar Scanner
      */
@@ -53,9 +53,15 @@ public class Veiculo {
     void vender(Cliente cliente,  Venda venda) {
 
 
+    }
+    public Veiculo localizarVeiculo(String modeloVeiculo){
+        for (Veiculo veiculo : litVeiculos){
+            if (veiculo.modelo.equalsIgnoreCase(modeloVeiculo)){
+                return veiculo;
 
+            }
 
-
-
+        }
+        return null;
     }
 }

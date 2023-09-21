@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Funcionario {
+ public class Funcionario {
 
     /**
      * Declarar Variaveis
      *
      */
 
-    String nome, email, endereco;
-    long telefone, cpf, rg;
-    double comissao;
+    public String nome, email, endereco;
+    public long telefone, cpf, rg;
+     public double comissao;
     /**
      * Instanciar o Scanner
      */
@@ -23,19 +23,15 @@ public class Funcionario {
 
     public void cadastrarFuncionario() {
         System.out.println("------Cadastro Cliente-------");
-        System.out.println("Qual é o nome do cliente: ");
+        System.out.println("Qual é o nome do Funcionario: ");
         nome = teclado.nextLine();
-        System.out.println("Digite seu CPF:  ");
-        cpf = teclado.nextLong();
-        System.out.println("Digite seu RG: ");
-        rg = teclado.nextLong();
         System.out.println("Informe seu Telefone: ");
         telefone = teclado.nextLong();
         teclado.nextInt();
         System.out.println(" Informe o email:   ");
         email = teclado.nextLine();
         teclado.nextLine();
-        System.out.println("Informe seu Endereço: ");
+        System.out.println("Informe o Endereço da agencia: ");
         endereco = teclado.nextLine();
         teclado.nextLine();
         System.out.println(" Cadastro Finalizado");
@@ -57,6 +53,15 @@ public class Funcionario {
         for (Funcionario objFuncionario : listFuncionarios){
             System.out.println(objFuncionario.nome);
         }
+    }
+    public Funcionario pesquisarVendedor(String nome) {
+        for (Funcionario funcionario : listFuncionarios) {
+            if (funcionario.nome.equalsIgnoreCase(nome)) {
+                return funcionario;
+            }
+        }
+
+        return null;
     }
 
 }

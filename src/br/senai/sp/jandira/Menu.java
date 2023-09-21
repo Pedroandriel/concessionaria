@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Menu {
     Cliente refListCliente = new Cliente();
     Funcionario refListFuncionario = new Funcionario();
-    Venda objVendas = new Venda();
+    Venda objVenda = new Venda();
     Veiculo refListVeiculo = new Veiculo();
     public void menu(){
         Scanner teclado = new Scanner(System.in);
@@ -24,7 +24,8 @@ public class Menu {
             System.out.println(" 6- Listar Clientes : ");
             System.out.println(" 7- Listar Funcionarios: ");
             System.out.println(" 8- Pesquisar Por Veiculos:  " );
-            System.out.println(" 9- Sair: ");
+            System.out.println(" 9- Pagamento a Vista ou financiado? : ");
+            System.out.println(" 10- Sair!");
 
             int escolhaUsuario = teclado.nextInt();
             teclado.nextLine();
@@ -40,7 +41,7 @@ public class Menu {
                 case 2:
                     Veiculo objVeiculo = new Veiculo();
                     objVeiculo.cadastrarVeiculos();
-                    objVeiculo.adicionarVeiculos(objVeiculo);
+                    refListVeiculo.adicionarVeiculos(objVeiculo);
                     refListVeiculo.adicionarVeiculos(objVeiculo);
                     break;
 
@@ -52,11 +53,45 @@ public class Menu {
 
                 case 4:
 
-                    boolean validaVenda = objVendas.realizarVenda(refListVeiculo, refListCliente);
+                    refListCliente.listarCliente();
+                    System.out.println(" Informe o nome do cliente:  ");
+                    String nomeComprador = teclado.nextLine();
 
-                    if (validaVenda){
-                        refListCliente.dinheiroDispostonivel -= refListVeiculo.preco;
-                        System.out.println("O Saldo dp cliente é:   " + refListCliente.dinheiroDispostonivel);
+                    refListVeiculo.listarVeiculos();
+                    System.out.println(" Informe o modelo do Veiculo: ");
+                    String modeloVeiculo = teclado.nextLine();
+
+                    refListFuncionario.listarFuncionario();
+                    System.out.println(" Informe o nome do vendedor:  ");
+                    String nomeVendedor = teclado.nextLine();
+
+                    Cliente objComprador = refListCliente.pesquisarComprador(nomeComprador);
+                     Veiculo objVeiculoVenda = refListVeiculo.localizarVeiculo(modeloVeiculo);
+                     Funcionario objVendedor = refListFuncionario.pesquisarVendedor(nomeVendedor);
+
+                     boolean formaPagamento = objVenda.avaliaFormaPagamento();
+
+
+                     boolean validaVenda = false;
+                     boolean validaFinanciamento = false;
+
+                     if(formaPagamento){
+                         validaVenda = objVenda.realizarVenda(objVeiculoVenda, objComprador);
+                     }else{
+                         validaFinanciamento= objVenda.realizarFinanciamento(objComprador, objVeiculoVenda);
+                     }
+
+
+
+                    boolean validaVnda = objVenda.realizarVenda(refListVeiculo, refListCliente);
+
+                    if (validaVenda || validaFinanciamento){
+                        System.out.println("////// ------- Parabens ------/////");
+                        objComprador.dinheiroDispostonivel -= objVeiculoVenda.preco;
+                        System.out.println("O Saldo do cliente é:   " + objComprador.dinheiroDispostonivel);
+
+                        objVendedor.receberComissao(objVeiculoVenda);
+                        System.out.println("O Funcionario recebeu:  " + objVendedor.comissao);
                     }
 
                     break;
@@ -93,14 +128,10 @@ public class Menu {
                    continuar = false;
                    break;
             }
-            if (escolhaUsuario <1 || escolhaUsuario >5){
+            if (escolhaUsuario <1 || escolhaUsuario >9) {
                 System.out.println(" Escolha uma opção de 1 a 6");
 
             }
-            if (escolhaUsuario <1 ||  escolhaUsuario >9 ){
-                System.out.println(" Escolha uma opção valida   !!!");
-            }
-
         }
     }
 
